@@ -46,6 +46,16 @@ class CustumerController {
         }
     }
 
+    // Implementando um DELETE
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteCustomer(@PathVariable id: Int){
+            customers.removeIf { it.id == id}
+    }
+
+
+
+
 
 
 }
