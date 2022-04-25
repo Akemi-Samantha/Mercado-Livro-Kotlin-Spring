@@ -13,8 +13,13 @@ class CustumerController {
 
     val customers = mutableListOf<CustomerModel>()
 
+
+    // Add uma Query Params - Na hora de requisitar ...
     @GetMapping
-    fun getAll(): MutableList<CustomerModel>{
+    fun getAll(@RequestParam name: String?): List<CustomerModel> {
+        name?.let{
+            return customers.filter { it.name.contains(name, true) }
+        }
         return customers
     }
 
