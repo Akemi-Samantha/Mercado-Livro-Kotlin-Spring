@@ -1,66 +1,46 @@
-package com.mercadolivro.controllers
+package com.mercadolivro.controller
 
-import com.mercadolivro.controllers.requestDTO.PostCustomers
-import com.mercadolivro.controllers.requestDTO.PutCustomers
+
+import com.mercadolivro.controllers.requestDTO.PostCustomerRequest
+import com.mercadolivro.controllers.requestDTO.PutCustomerRequest
+import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-
 @RestController
-@RequestMapping("customers")
-class CustumerController {
+@RequestMapping("customer")
+class CustomerController(
+    val customerService : CustomerService
+) {
 
-    val customers = mutableListOf<CustomerModel>()
-
-
-    // Add uma Query Params - Na hora de requisitar ...
     @GetMapping
     fun getAll(@RequestParam name: String?): List<CustomerModel> {
-        name?.let{
-            return customers.filter { it.name.contains(name, true) }
-        }
-        return customers
+        return customerService.getAll(name)
     }
 
     @PostMapping
-    fun createCustomer(@RequestBody customer: PostCustomers){
-
-        var id = if(customers.isEmpty()){
-            1
-        }else{
-            customers.last().id + 1
-        }
-
-        customers.add(CustomerModel( id ,customer.name,customer.email,customer.birthDate,customer.cpf,customer.gender))
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody customer: PostCustomerRequest) {
+        customerService.create(customer.toCustomerModel())
     }
 
-    // Receber uma váriavel pela url
-    @GetMapping("{id}")
-    fun getCustomer(@PathVariable id: Int ): CustomerModel{
-        return customers.filter { it.id == id }.first()
+    @GetMapping("/{id}")
+    fun getCustomer(@PathVariable id: String): CustomerModel {
+        return customerService.getCustomer(id)
     }
 
-    // Implementando o PUT - Criado uma request Put, pois tem variaveis que não devem ser atualizadas como o cpf
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCuatomer(@PathVariable id: Int, @RequestBody customer: PutCustomers) {
-        return customers.filter { it.id == id }.first().let {
-            it.email = customer.email
-            it.name = customer.name
-        }
+    fun update(@PathVariable id: String, @RequestBody customer: PutCustomerRequest) {
+        customerService.update(customer.toCustomerModel(id))
     }
 
-    // Implementando um DELETE
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCustomer(@PathVariable id: Int){
-            customers.removeIf { it.id == id}
+    fun delete(@PathVariable id: String) {
+        customerService.delete(id)
     }
-
-
-
-
-
 
 }
