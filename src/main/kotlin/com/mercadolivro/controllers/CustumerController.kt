@@ -1,17 +1,46 @@
-package com.mercadolivro.controllers
+package com.mercadolivro.controller
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
 
+import com.mercadolivro.controllers.requestDTO.PostCustomerRequest
+import com.mercadolivro.controllers.requestDTO.PutCustomerRequest
+import com.mercadolivro.extension.toCustomerModel
+import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.service.CustomerService
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("customer")
-class CustumerController {
+class CustomerController(
+    val customerService : CustomerService
+) {
 
     @GetMapping
-    fun getCustomer(): String{
-        return "Custuomer number one"
+    fun getAll(@RequestParam name: String?): List<CustomerModel> {
+        return customerService.getAll(name)
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun create(@RequestBody customer: PostCustomerRequest) {
+        customerService.create(customer.toCustomerModel())
+    }
+
+    @GetMapping("/{id}")
+    fun getCustomer(@PathVariable id: String): CustomerModel {
+        return customerService.getCustomer(id)
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun update(@PathVariable id: String, @RequestBody customer: PutCustomerRequest) {
+        customerService.update(customer.toCustomerModel(id))
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(@PathVariable id: String) {
+        customerService.delete(id)
     }
 
 }
