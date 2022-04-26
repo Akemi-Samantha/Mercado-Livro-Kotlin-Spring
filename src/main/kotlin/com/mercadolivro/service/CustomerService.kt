@@ -19,7 +19,7 @@ class CustomerService {
         val id = if(customers.isEmpty()) {
             1
         } else{
-            customers.last().id + 1
+            customers.last().id!! + 1
         }
 
         customer.id = id

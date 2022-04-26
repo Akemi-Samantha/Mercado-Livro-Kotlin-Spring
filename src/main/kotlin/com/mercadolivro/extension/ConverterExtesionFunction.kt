@@ -5,7 +5,7 @@ import com.mercadolivro.controllers.requestDTO.PutCustomerRequest
 import com.mercadolivro.model.CustomerModel
 
 fun PostCustomerRequest.toCustomerModel(): CustomerModel {
-    return CustomerModel(name = this.name, email = this.email , birthDate = this.birthDate, cpf = this.cpf, gender = this.gender)
+    return CustomerModel(name = this.name, email = this.email)
 }
 
 fun PutCustomerRequest.toCustomerModel(id: Int): CustomerModel {
