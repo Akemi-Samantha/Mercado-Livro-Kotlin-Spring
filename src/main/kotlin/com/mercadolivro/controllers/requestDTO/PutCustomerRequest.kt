@@ -1,6 +1,6 @@
 package com.mercadolivro.controllers.requestDTO
 
-data class PutCustomers(
+data class PutCustomerRequest(
 
     var name: String,
     var email: String,

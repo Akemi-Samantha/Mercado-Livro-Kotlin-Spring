@@ -1,6 +1,6 @@
 package com.mercadolivro.controllers.requestDTO
 
-data class PostCustomers(
+data class PostCustomerRequest(
 
     var name: String,
     var email: String,
