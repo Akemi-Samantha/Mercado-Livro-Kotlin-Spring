@@ -3,7 +3,6 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    driver-class-name: org.postgresql.Study
     url: jdbc:postgresql://localhost:5432/mercadolivro?createDatabaseIfNotExist=true
     username: root
     password: root
