@@ -16,14 +16,7 @@ data class CustomerModel(
     var name: String,
     @Column(name = "email_customer")
     var email: String,
-//    @Column(name = "cpf_customer")
-//    var cpf: Int,
-//    @Column(name = "birthDate_customer")
-//    var birthDate: Int,
-//    @Column(name = "gender_customer")
-//    var gender: String,
-//    @Column
-//    var uuid: Int
+
 
 
 )
