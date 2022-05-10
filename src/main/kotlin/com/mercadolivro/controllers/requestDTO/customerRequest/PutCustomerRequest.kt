@@ -1,4 +1,4 @@
-package com.mercadolivro.controllers.requestDTO
+package com.mercadolivro.controllers.requestDTO.customerRequest
 
 data class PutCustomerRequest(
 

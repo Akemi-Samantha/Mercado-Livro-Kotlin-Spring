@@ -1,6 +1,6 @@
 package com.mercadolivro.model
 
-import com.mercadolivro.enums.BookEnum
+import com.mercadolivro.enums.BookStatus
 import java.math.BigDecimal
 import javax.persistence.*
 
@@ -17,7 +17,7 @@ data class BookModel(
     var price: BigDecimal? = null,
     @Column
     @Enumerated(EnumType.STRING)
-    var status: BookEnum? = null,
+    var status: BookStatus? = null,
     @ManyToOne
     @JoinColumn(name = "customer_id")
     var customer: CustomerModel? = null

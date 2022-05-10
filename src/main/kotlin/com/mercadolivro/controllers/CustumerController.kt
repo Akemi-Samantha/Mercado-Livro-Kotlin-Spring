@@ -1,8 +1,8 @@
 package com.mercadolivro.controller
 
 
-import com.mercadolivro.controllers.requestDTO.PostCustomerRequest
-import com.mercadolivro.controllers.requestDTO.PutCustomerRequest
+import com.mercadolivro.controllers.requestDTO.customerRequest.PostCustomerRequest
+import com.mercadolivro.controllers.requestDTO.customerRequest.PutCustomerRequest
 import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.service.CustomerService
@@ -28,7 +28,7 @@ class CustomerController(
 
     @GetMapping("/{id}")
     fun getCustomer(@PathVariable id: Int): CustomerModel {
-        return customerService.getCustomer(id)
+        return customerService.getByID(id)
     }
 
     @PutMapping("/{id}")
