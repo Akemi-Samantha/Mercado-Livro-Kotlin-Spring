@@ -22,7 +22,4 @@ data class BookModel(
     @JoinColumn(name = "customer_id")
     var customer: CustomerModel? = null
 
-
-
-
 )

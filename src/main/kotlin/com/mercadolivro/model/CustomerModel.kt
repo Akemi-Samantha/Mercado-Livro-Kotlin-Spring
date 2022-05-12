@@ -16,6 +16,7 @@ data class CustomerModel(
     var name: String,
     @Column(name = "email_customer")
     var email: String,
+   // var book : BookModel? = null
 
 
 

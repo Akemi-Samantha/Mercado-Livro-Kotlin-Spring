@@ -1,12 +1,12 @@
 package com.mercadolivro.controllers.requestDTO.bookRequest
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonAlias
 import java.math.BigDecimal
 
 data class PostBookRequest(
 
     var name: String,
     var price: BigDecimal,
-    @JsonProperty("customer_id")
+    @JsonAlias("customer_id")
     var customerId: Int
 )
